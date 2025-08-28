@@ -82,19 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", handleUnregister);
       });
 
-      // Add event listeners to register buttons
-      document.querySelectorAll(".register-btn").forEach((button) => {
-        button.addEventListener("click", (event) => {
+      // Use event delegation for register buttons
+      activitiesList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("register-btn")) {
           const activityName = event.target.getAttribute("data-activity");
           const signupContainer = document.getElementById("signup-container");
           const activitySelect = document.getElementById("activity");
-
-          // Set the selected activity
-          activitySelect.value = activityName;
-
-          // Show the signup form
-          signupContainer.classList.remove("hidden");
-        });
+          if (activitySelect && signupContainer) {
+            activitySelect.value = activityName;
+            signupContainer.classList.remove("hidden");
+          }
+        }
       });
     } catch (error) {
       activitiesList.innerHTML =
