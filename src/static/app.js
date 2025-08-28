@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
 
+  const meetupList = document.getElementById("meetup-list");
+
   // Function to fetch activities from API
   async function fetchActivities() {
     try {
@@ -12,6 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Clear loading message
       activitiesList.innerHTML = "";
+
+      // Clear meetup list
+      if (meetupList) {
+        meetupList.innerHTML = "";
+      }
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -54,6 +61,19 @@ document.addEventListener("DOMContentLoaded", () => {
         option.value = name;
         option.textContent = name;
         activitySelect.appendChild(option);
+
+        // Add to meetup list
+        if (meetupList) {
+          const meetupItem = document.createElement("div");
+          meetupItem.className = "activity-card";
+          meetupItem.innerHTML = `
+            <h4>${name}</h4>
+            <p>${details.description}</p>
+            <p><strong>Schedule:</strong> ${details.schedule}</p>
+            <p><strong>Location:</strong> (Location info coming soon)</p>
+          `;
+          meetupList.appendChild(meetupItem);
+        }
       });
 
       // Add event listeners to delete buttons
