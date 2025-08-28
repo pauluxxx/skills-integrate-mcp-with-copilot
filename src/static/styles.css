@@ -30,14 +30,17 @@ header h1 {
 
 main {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 30px;
   justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
   main {
-    grid-template-columns: 2fr 1fr;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
   }
 }
 
@@ -144,6 +147,15 @@ section h3 {
 .participants-section p {
   color: #777;
   font-style: italic;
+}
+
+.register-btn {
+  background-color: #4caf50;
+  margin-top: 10px;
+}
+
+.register-btn:hover {
+  background-color: #66bb6a;
 }
 
 .form-group {

@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <button class="register-btn" data-activity="${name}">Register Student</button>
           <div class="participants-container">
             ${participantsHTML}
           </div>
@@ -79,6 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
       // Add event listeners to delete buttons
       document.querySelectorAll(".delete-btn").forEach((button) => {
         button.addEventListener("click", handleUnregister);
+      });
+
+      // Use event delegation for register buttons
+      activitiesList.addEventListener("click", (event) => {
+        if (event.target.classList.contains("register-btn")) {
+          const activityName = event.target.getAttribute("data-activity");
+          const signupContainer = document.getElementById("signup-container");
+          const activitySelect = document.getElementById("activity");
+          if (activitySelect && signupContainer) {
+            activitySelect.value = activityName;
+            signupContainer.classList.remove("hidden");
+          }
+        }
       });
     } catch (error) {
       activitiesList.innerHTML =
